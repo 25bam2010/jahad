@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --accent-color: #FFC107;
+    --text-color: #333;
+    --light-bg: #f8f9fa;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    transform: translateY(0);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.container:hover::before {
+    transform: scaleX(1);
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 3px;
+}
+
+.meal-info {
+    background: var(--light-bg);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.meal-info h2 {
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 500;
+    text-align: center;
+}
+
+.meal-info ul {
+    list-style: none;
+}
+
+.meal-info li {
+    margin: 12px 0;
+    padding: 15px;
+    background: var(--white);
+    border-radius: 10px;
+    transition: var(--transition);
+    transform: translateX(0);
+    animation: slideIn 0.5s ease-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-left: 40px;
+}
+
+.meal-info li::before {
+    content: '🍽️';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+}
+
+.meal-info li:hover {
+    transform: translateX(10px);
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.no-menu {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.nutrition-info {
+    margin-top: 30px;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.5s ease-out 0.3s both;
+}
+
+.nutrition-info h3 {
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.nutrition-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.nutrition-info p {
+    line-height: 1.8;
+    text-align: center;
+    color: #555;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #f5f5f5;
+        --light-bg: #2c2c2c;
+        --white: #1a1a1a;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+    }
+    
+    .meal-info li:hover {
+        background: var(--secondary-color);
+    }
+    
+    .nutrition-info p {
+        color: #aaa;
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .meal-info {
+        padding: 15px;
+    }
+    
+    .meal-info li {
+        padding: 12px 12px 12px 35px;
+        font-size: 0.95em;
+    }
+    
+    .nutrition-info {
+        padding: 15px;
+    }
+}

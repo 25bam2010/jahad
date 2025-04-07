@@ -1,0 +1,35 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+#selectButton {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+#selectButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#result {
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+#selectedNumbers {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #198754;
+} 

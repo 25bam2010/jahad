@@ -2,15 +2,47 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>대한민국 주요 도시 날씨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>달력 프로그램</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>대한민국 주요 도시 날씨</h1>
-    <div id="weatherContainer"></div>
+  <div class="calendar-container" id="calendarContainer">
+    <div class="header">
+      <button onclick="moveMonth(-1)">◀</button>
+      <select id="yearSelect"></select>년
+      <select id="monthSelect"></select>월
+      <button onclick="moveMonth(1)">▶</button>
+    </div>
+    <div class="theme-picker">
+      <label>배경 색상:
+        <input type="color" id="themeColor" value="#ffffff" />
+      </label>
+    </div>
+    <div class="weekdays">
+      <div class="sun">일</div>
+      <div>월</div>
+      <div>화</div>
+      <div>수</div>
+      <div>목</div>
+      <div>금</div>
+      <div>토</div>
+    </div>
+    <div id="calendar" class="calendar"></div>
   </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="modalDate"></span>
+      <textarea id="eventText" placeholder="일정을 입력하세요"></textarea>
+      <input type="color" id="colorInput" value="#000000" />
+      <div class="modal-buttons">
+        <button id="saveBtn">저장</button>
+        <button id="closeBtn">닫기</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -14,11 +14,20 @@
       <select id="monthSelect"></select>월
       <button onclick="moveMonth(1)">▶</button>
     </div>
+
     <div class="theme-picker">
       <label>배경 색상:
         <input type="color" id="themeColor" value="#ffffff" />
       </label>
     </div>
+
+    <div class="controls">
+      <input type="text" id="searchInput" placeholder="일정 검색..." />
+      <button onclick="searchEvents()">🔍 검색</button>
+      <button onclick="copyEvents()">📋 공유</button>
+      <button onclick="window.print()">🖨️ 인쇄</button>
+    </div>
+
     <div class="weekdays">
       <div class="sun">일</div>
       <div>월</div>
@@ -28,6 +37,7 @@
       <div>금</div>
       <div>토</div>
     </div>
+
     <div id="calendar" class="calendar"></div>
   </div>
 

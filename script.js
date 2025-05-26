@@ -36,7 +36,6 @@ function renderCalendar() {
   const calendar = document.getElementById("calendar");
   calendar.innerHTML = "";
 
-  // 연도/월 셀렉트 값 설정
   yearSelect.value = year;
   monthSelect.value = month;
 
@@ -56,9 +55,7 @@ function renderCalendar() {
     number.className = "date-number";
     number.textContent = d;
 
-    if (dayOfWeek === 0) {
-      number.style.color = "red";
-    }
+    if (dayOfWeek === 0) number.style.color = "red";
 
     const holidayKey = `${month + 1}-${d}`;
     const holidayName = holidays[holidayKey];
@@ -77,7 +74,7 @@ function renderCalendar() {
       try {
         saved = JSON.parse(savedData);
       } catch (e) {
-        console.error(`JSON 파싱 오류: ${fullDate}`, savedData);
+        console.error(`JSON 오류: ${fullDate}`, savedData);
       }
     }
 
@@ -85,7 +82,6 @@ function renderCalendar() {
       const span = document.createElement("span");
       span.textContent = saved.text;
       span.style.color = saved.color || "black";
-      span.style.fontSize = "12px";
       day.appendChild(span);
     }
 
@@ -107,7 +103,6 @@ function moveMonth(diff) {
   renderCalendar();
 }
 
-// 드롭다운으로 직접 이동
 yearSelect.addEventListener("change", () => {
   date.setFullYear(Number(yearSelect.value));
   renderCalendar();
@@ -117,7 +112,6 @@ monthSelect.addEventListener("change", () => {
   renderCalendar();
 });
 
-// 배경 색상 변경
 themeColor.addEventListener("input", () => {
   calendarContainer.style.backgroundColor = themeColor.value;
 });
@@ -136,7 +130,6 @@ saveBtn.addEventListener("click", () => {
   renderCalendar();
 });
 
-// 초기 연/월 select 채우기
 function populateSelects() {
   const currentYear = new Date().getFullYear();
   for (let y = currentYear - 5; y <= currentYear + 5; y++) {
@@ -153,9 +146,34 @@ function populateSelects() {
   }
 }
 
-populateSelects();
-renderCalendar();
+function searchEvents() {
+  const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+  const days = document.querySelectorAll(".calendar .day");
 
-// 일정 저장
-saveBtn.addEvent
+  days.forEach(day => {
+    const text = day.textContent.toLowerCase();
+    if (text.includes(keyword)) {
+      day.style.border = "2px solid blue";
+    } else {
+      day.style.border = "1px solid transparent";
+    }
+  });
+}
+
+function copyEvents() {
+  const events = {};
+  for (let key in localStorage) {
+    if (localStorage.hasOwnProperty(key) && /^\d{4}-\d{2}-\d{2}$/.test(key)) {
+      try {
+        events[key] = JSON.parse(localStorage[key]);
+      } catch (e) {}
+    }
+  }
+  const jsonStr = JSON.stringify(events, null, 2);
+  navigator.clipboard.writeText(jsonStr).then(() => {
+    alert("일정 데이터가 복사되었습니다.");
+  });
+}
+
+populateSelects();
 renderCalendar();
